@@ -8,7 +8,7 @@
 
 
 {% if user.is_authenticated == False %}
-{% load static %}{% load crispy_forms_tags %}
+{% load static %}
 
 <html>
     <head>
@@ -28,7 +28,7 @@
                 <div class="col-md-8">
                     <form method="Post" class="form-group" action="{% url 'register' %}">
                         {% csrf_token %}
-                        {{form|crispy}}
+                        {{form}}
                         <button type="submit" class="btn btn-success">
                                 Register
                         </button>

@@ -1,0 +1,23 @@
+{% extends 'blog/base.html' %}
+
+
+{% block title %}
+My page
+{% endblock %}
+
+{% block content %}
+    You logged in as : {{ request.user.username }}
+    <p></p>
+
+    <a href="/post/new">
+        Add new post
+    </a>
+    <p></p>
+    <a href="{% url 'logout' %}">
+        Quit
+    </a>
+
+
+{% endblock %}
+
+

@@ -1,0 +1,27 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}
+  Main page
+{% endblock %}
+
+
+{% block content %}
+    {% for post in posts %}
+        <div class="card mb-4">
+            <div class="card-header">
+                {{ post.published_date }}
+            </div>
+        <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+        <p class="card-text">{{ post.text|truncatewords:15 }}</p>
+        <a href="{% url 'post_detail' pk=post.pk %}" class="btn btn-light">Read</a>
+      </div>
+    </div>
+
+
+    {% endfor %}
+{% endblock %}
+
+
+
+

@@ -25,6 +25,7 @@ urlpatterns = [
     path('register/', v.register, name='register'),
     path('accounts/login/', views.LoginView.as_view(), name='login'),
     #path('', views.LoginView.as_view(), name='logout'),
+    path('password_reset', v.password_res, name='password_reset_1'),
     path('', include('blog.urls')),
     path('', include('django.contrib.auth.urls')),
 

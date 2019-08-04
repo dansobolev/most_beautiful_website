@@ -2,8 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.contrib.auth import login,authenticate
 from django.contrib.auth.forms import UserCreationForm
-from .forms import RegisterForm
-from .forms import PostForm
+from .forms import RegisterForm, PostForm
 from .models import Post
 
 
@@ -48,22 +47,13 @@ def post_edit(request, pk):
 
 
 def register(request):
-    """if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-
-        else:
-            return redirect("/")
-
-    else:"""
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect("/login")
     else:
-        form = UserCreationForm()
+        form = RegisterForm()
 
     return render(request, 'register/register.html', {"form": form})
 
@@ -74,5 +64,8 @@ def register(request):
 def yourprofile(req):
     return render(req, 'blog/my_profile.html')
 
+
+def password_res(req):
+    return render(req, 'registration/password_reset_form.html')
 
 

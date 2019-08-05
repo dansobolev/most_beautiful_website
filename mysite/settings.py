@@ -26,9 +26,10 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'd)vs3szbw7tksr5nqa%on5mz*xkg+d
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['likeeman1.pythonanywhere.com', '127.0.0.1']
+
 
 
 # Application definition
@@ -109,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
@@ -121,9 +122,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+
 STATIC_URL = '/static/'
 
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/login'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'forum_staff01@gmail.com'
+EMAIL_HOST_PASSWORD = 'mdxlswqkqvpkkqnc'
+EMAIL_POST = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = "Best regards, forum staff"
 

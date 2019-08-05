@@ -1,18 +1,40 @@
 {% extends 'blog/base.html' %}
 
-{% block content %}
-    <div class="post">
-        {% if post.published_date %}
-            <div class="date">
-                {{ post.published_date }}
-            </div>
+
+    {% block content %}
+        <div class="post">
+            {% if post.published_date %}
+                <div class="date">
+                    {{ post.published_date }}
+                </div>
+            {% endif %}
+            {% if user.is_authenticated %}
+                <form action="{% url 'post_edit' pk=post.pk %}">
+                    <button class="btn btn-light"><span class="glyphicon glyphicon-pencil">Edit</span></button>
+                </form>
+            {% endif %}
+            <h1>{{ post.title }}</h1>
+            <p>{{ post.text|linebreaksbr }}</p>
+        </div>
+
+        {{ post.author }}, {{ request.user.username }}
+<p></p>
+        {% if request.user.username == post.author %}
+            <a href="#">you are a good boy</a>
+        {% else %}
+            <a href="#">you r a strange guy</a>
         {% endif %}
-        {% if user.is_authenticated %}
-            <form action="{% url 'post_edit' pk=post.pk %}">
-                <button class="btn btn-light"><span class="glyphicon glyphicon-pencil">Edit</span></button>
-            </form>
+
+
+        <p></p>
+        {% if post.author == request.user.username %}
+            True
+        {% else %}
+            False
         {% endif %}
-        <h1>{{ post.title }}</h1>
-        <p>{{ post.text|linebreaksbr }}</p>
-    </div>
-{% endblock %}
+
+    {% endblock %}
+
+
+
+

@@ -4,7 +4,7 @@ from django.contrib.auth import login,authenticate
 from django.contrib.auth.forms import UserCreationForm
 from .forms import RegisterForm, PostForm
 from .models import Post
-from ipware.ip import get_ip
+from ipware.ip import get_real_ip
 
 
 
@@ -63,7 +63,7 @@ def register(request):
 
 
 def yourprofile(req):
-    ip = get_ip((req))
+    ip = get_real_ip(req)
     return render(req, 'blog/my_profile.html', {'ip': ip})
 
 

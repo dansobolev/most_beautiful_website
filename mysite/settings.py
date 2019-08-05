@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import smtplib
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -26,7 +27,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'd)vs3szbw7tksr5nqa%on5mz*xkg+d
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['likeeman1.pythonanywhere.com', '127.0.0.1']
 
@@ -134,7 +135,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'forum_staff01@gmail.com'
 EMAIL_HOST_PASSWORD = 'mdxlswqkqvpkkqnc'
-EMAIL_POST = 587
+EMAIL_POST = 465
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = "Best regards, forum staff"
 

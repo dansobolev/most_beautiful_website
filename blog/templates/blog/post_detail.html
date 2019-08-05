@@ -8,7 +8,7 @@
                     {{ post.published_date }}
                 </div>
             {% endif %}
-            {% if user.is_authenticated %}
+            {% if post.author.username == request.user.username %}
                 <form action="{% url 'post_edit' pk=post.pk %}">
                     <button class="btn btn-light"><span class="glyphicon glyphicon-pencil">Edit</span></button>
                 </form>
@@ -17,23 +17,10 @@
             <p>{{ post.text|linebreaksbr }}</p>
         </div>
 
-        {{ post.author }}, {{ request.user.username }}
-<p></p>
-        {% if request.user.username == post.author %}
-            <a href="#">you are a good boy</a>
-        {% else %}
-            <a href="#">you r a strange guy</a>
-        {% endif %}
-
-
-        <p></p>
-        {% if post.author == request.user.username %}
-            True
-        {% else %}
-            False
-        {% endif %}
-
     {% endblock %}
+
+
+
 
 
 

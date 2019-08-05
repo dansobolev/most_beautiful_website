@@ -1,6 +1,7 @@
 {% extends 'blog/base.html' %}
 
 
+
 {% block title %}
 My page
 {% endblock %}
@@ -8,7 +9,8 @@ My page
 {% block content %}
     You logged in as : {{ request.user.username }}
     <p></p>
-
+    Your IP is : {{ ip }}
+    <p></p>
     <a href="/post/new">
         Add new post
     </a>

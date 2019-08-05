@@ -63,7 +63,8 @@ def register(request):
 
 
 def yourprofile(req):
-    return render(req, 'blog/my_profile.html')
+    ip = get_ip((req))
+    return render(req, 'blog/my_profile.html', {'ip': ip})
 
 
 def password_res(req):

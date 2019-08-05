@@ -9,7 +9,7 @@ My page
 {% block content %}
     You logged in as : {{ request.user.username }}
     <p></p>
-    Your IP is :
+    Your IP is : {{ ip }}
     <p></p>
     <a href="/post/new">
         Add new post

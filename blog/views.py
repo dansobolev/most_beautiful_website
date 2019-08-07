@@ -78,11 +78,11 @@ def yourprofile(req):
 def password_res(req):
     return render(req, 'registration/password_reset_form.html')
 
-def send_email_function(user, email, text):
+def send_email_function(name, email, text, user):
     # user_email можешь сохранить только для того чтоб после отсылать обратно
     send_mail(
-        '{}'.format(user),
-        '{},{}'.format(text, email),
+        '{}'.format(name),
+        '{}\n{}\n{}'.format(text, email, user),
         'forum.staff01@gmail.com',
         ['forum.staff01@gmail.com']
     )
@@ -91,13 +91,14 @@ def send_email_function(user, email, text):
 
 def contact_us(request):
     if request.method == "POST":
+        user = User.objects.get(username=request.user.username)
         form = EmailForm(request.POST)
         if form.is_valid():
             form.save()
-            user = form.cleaned_data.get('username')
+            name = form.cleaned_data.get('username')
             email = form.cleaned_data.get('email')
             message = form.cleaned_data.get('message')
-            send_email_function(user, email, message)
+            send_email_function(name, email, message, user)
             return render(request, 'blog/sent_successfully.html')
 
     else:

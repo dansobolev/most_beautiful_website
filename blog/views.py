@@ -83,8 +83,8 @@ def send_email_function(user, email, text):
     send_mail(
         '{}'.format(user),
         '{},{}'.format(text, email),
-        'daniil.sob56@gmail.com',
-        ['daniil.sob56@gmail.com']
+        'forum.staff01@gmail.com',
+        ['forum.staff01@gmail.com']
     )
 
 

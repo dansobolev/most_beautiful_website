@@ -25,7 +25,7 @@ class Email(models.Model):
     message = models.CharField(max_length=300)
 
 
-class EmailForm(ModelForm):
+"""class EmailForm(ModelForm):
     class Meta:
         model = Email
         fields = [
@@ -34,4 +34,4 @@ class EmailForm(ModelForm):
             'message'
         ]
 
-
+"""

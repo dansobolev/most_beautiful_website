@@ -2,8 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.contrib.auth import login,authenticate
 from django.contrib.auth.forms import UserCreationForm
-from .forms import RegisterForm, PostForm
-from .models import Post, EmailForm
+from .forms import RegisterForm, PostForm, EmailForm
+from .models import Post
 import smtplib
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
@@ -97,10 +97,8 @@ def contact_us(request):
             user = form.cleaned_data.get('username')
             email = form.cleaned_data.get('email')
             message = form.cleaned_data.get('message')
-            if send_email_function(user, email, message):
-                return render(request, 'blog/sent_successfully.html')
-            else:
-                print("Fail")
+            send_email_function(user, email, message)
+            return render(request, 'blog/sent_successfully.html')
 
     else:
         form = EmailForm()

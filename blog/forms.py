@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Post
+from .models import Post, Email
 from django.core.exceptions import ValidationError
 
 
@@ -49,6 +49,19 @@ class RegisterForm(forms.Form):
             self.cleaned_data['password1']
         )
         return user
+
+
+class EmailForm(forms.ModelForm):
+    message = forms.CharField(widget=forms.Textarea)
+    class Meta:
+        model = Email
+        fields = [
+            'username',
+            'email',
+            'message'
+        ]
+
+
 
 
 '''class EmailForm(forms.Form):

@@ -82,8 +82,8 @@ def send_email_function(user, email, text):
     # user_email можешь сохранить только для того чтоб после отсылать обратно
     send_mail(
         '{}'.format(user),
-        '{}'.format(text),
-        '{}'.format(email),
+        '{},{}'.format(text, email),
+        'daniil.sob56@gmail.com',
         ['daniil.sob56@gmail.com']
     )
 

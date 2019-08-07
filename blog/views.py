@@ -2,8 +2,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.contrib.auth import login,authenticate
 from django.contrib.auth.forms import UserCreationForm
-from .forms import RegisterForm, PostForm, EmailForm
-from .models import Post
+from .forms import RegisterForm, PostForm
+from .models import Post, EmailForm
+import smtplib
+from django.core.mail import send_mail
 from django.contrib.auth.models import User
 
 
@@ -49,11 +51,13 @@ def post_edit(request, pk):
 
 def register(request):
     if request.method == "POST":
+        print("POST")
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect("/login")
     else:
+        print("NOT POST")
         form = RegisterForm()
 
     return render(request, 'register/register.html', {"form": form})
@@ -74,11 +78,35 @@ def yourprofile(req):
 def password_res(req):
     return render(req, 'registration/password_reset_form.html')
 
+def send_email_function(user, email, text):
+    # user_email можешь сохранить только для того чтоб после отсылать обратно
+    send_mail(
+        '{}'.format(user),
+        '{}'.format(text),
+        '{}'.format(email),
+        ['daniil.sob56@gmail.com']
+    )
+
+
+
 def contact_us(request):
-    form = EmailForm()
-    return render(request, 'blog/contact.html', {'form': form})
+    if request.method == "POST":
+        form = EmailForm(request.POST)
+        if form.is_valid():
+            form.save()
+            user = form.cleaned_data.get('username')
+            email = form.cleaned_data.get('email')
+            message = form.cleaned_data.get('message')
+            if send_email_function(user, email, message):
+                return render(request, 'blog/sent_successfully.html')
+            else:
+                print("Fail")
 
+    else:
+        form = EmailForm()
+        print("NOT POST")
 
+    return render(request, 'blog/contact.html', {'forms': form})
 
 
 

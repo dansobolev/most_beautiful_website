@@ -2,9 +2,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.contrib.auth import login,authenticate
 from django.contrib.auth.forms import UserCreationForm
-from .forms import RegisterForm, PostForm
+from .forms import RegisterForm, PostForm, EmailForm
 from .models import Post
-from ipware.ip import get_real_ip
+from django.contrib.auth.models import User
 
 
 
@@ -63,12 +63,22 @@ def register(request):
 
 
 def yourprofile(req):
-    ip = get_real_ip(req)
-    return render(req, 'blog/my_profile.html', {'ip': ip})
+    user = authenticate(username='danii', password='Dantous201')
+    if user.is_active:
+        answer = "Online"
+    else:
+        answer = "Offline"
+    return render(req, 'blog/my_profile.html', {'answer': answer})
 
 
 def password_res(req):
     return render(req, 'registration/password_reset_form.html')
+
+def contact_us(request):
+    form = EmailForm()
+    return render(request, 'blog/contact.html', {'form': form})
+
+
 
 
 

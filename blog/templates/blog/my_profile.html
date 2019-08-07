@@ -9,15 +9,19 @@ My page
 {% block content %}
     You logged in as : {{ request.user.username }}
     <p></p>
-    Your IP is : {{ ip }}
+    Status : {{ answer }}
     <p></p>
     <a href="/post/new">
         Add new post
     </a>
     <p></p>
 
-    <a href="/password/change">
+    <a href="/password_change">
         Change password
+    </a>
+    <p></p>
+    <a href="{% url 'contact' %}">
+        Contact us
     </a>
     <p></p>
     <a href="{% url 'logout' %}">

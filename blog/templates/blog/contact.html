@@ -1,0 +1,15 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}
+    Contact Us
+{% endblock %}
+
+{% block content %}
+    <form method="post" class="form-group" action="">
+        You have any issues or recommends? Contact us!
+        <p></p>
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-success">Send</button>
+    </form>
+{% endblock %}

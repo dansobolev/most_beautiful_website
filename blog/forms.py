@@ -50,3 +50,9 @@ class RegisterForm(forms.Form):
         )
         return user
 
+
+class EmailForm(forms.Form):
+    username = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': 'Name'}), min_length=4, max_length=150)
+    email = forms.EmailField(label='', widget=forms.TextInput(attrs={'placeholder': 'Email'}))
+    message = forms.CharField(label='', widget=forms.Textarea(attrs={'placeholder': 'Your message'}))
+

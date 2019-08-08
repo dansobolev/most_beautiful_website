@@ -52,7 +52,9 @@ class RegisterForm(forms.Form):
 
 
 class EmailForm(forms.ModelForm):
-    message = forms.CharField(widget=forms.Textarea)
+    username = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': 'Your name'}))
+    email = forms.EmailField(label='', widget=forms.TextInput(attrs={'placeholder': 'Your email'}))
+    message = forms.CharField(label='', widget=forms.Textarea(attrs={'placeholder': "Your message"}))
     class Meta:
         model = Email
         fields = [

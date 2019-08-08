@@ -69,13 +69,21 @@ def register(request):
 
 
 
-def yourprofile(req):
+def yourprofile(request):
     """user = authenticate(username='danii', password='Dantous201')
     if user.is_active:
         answer = "Online"
     else:
         answer = "Offline"""""
-    return render(req, 'blog/my_profile.html')
+    #user = User.objects.get(username=request.user.username)
+    """username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(request, username=username, password=password)
+    if user.is_active:
+        answer = "Online"
+    else:
+        answer = "Offline"""""
+    return render(request, 'blog/my_profile.html')
 
 
 def password_res(req):
@@ -84,8 +92,8 @@ def password_res(req):
 def send_email_function(name, email, text, user):
     # user_email можешь сохранить только для того чтоб после отсылать обратно
     send_mail(
-        '{}'.format(name),
-        '{}\n{}\n{}'.format(text, email, user),
+        'Name: {}'.format(name),
+        'Message: {}\nEmail: {}\n Username: {}'.format(text, email, user),
         'forum.staff01@gmail.com',
         ['forum.staff01@gmail.com']
     )

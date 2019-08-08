@@ -36,16 +36,19 @@ def post_new(request):
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
+        print("POST")
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
             post = form.save(commit=False)
-            post.author = request.user
+            #post.author = request.user
             post.published_date = timezone.now()
+            #name = form.cleaned_data.get("author")
             post.save()
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm(instance=post)
-    return render(request, 'blog/post_edit.html', {'form': form})
+        print("NOT POST")
+    return render(request, 'blog/post_edit.html', {'form': form, "post": post})
 
 
 
@@ -67,12 +70,12 @@ def register(request):
 
 
 def yourprofile(req):
-    user = authenticate(username='danii', password='Dantous201')
+    """user = authenticate(username='danii', password='Dantous201')
     if user.is_active:
         answer = "Online"
     else:
-        answer = "Offline"
-    return render(req, 'blog/my_profile.html', {'answer': answer})
+        answer = "Offline"""""
+    return render(req, 'blog/my_profile.html')
 
 
 def password_res(req):

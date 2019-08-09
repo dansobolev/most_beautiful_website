@@ -1,82 +1,74 @@
+<!DOCTYPE html>
+{% load static %}
 
-
-<!doctype html>
-{% load crispy_forms_tags %}
-
-
-
-<html>
+<html lang="en">
 <head>
-
-	<style type="text/css">
-		.sidenav {
-			height:100%;
-			width: 130px;
-			position: fixed;
-			z-index:1;
-			top:0;
-			left:0;
-			background-color:#111;
-			overflow-x: :hidden;
-			padding-top:20px;
-		}
-
-		.sidenav a {
-			padding:6px 8px 6px 16px;
-			text-decoration: none;
-			font-size:25px;
-			color: #818181;
-			display:block;
-		}
-
-		.sidenav a:hover{
-			color:#f1f1f1;
-		}
-
-		.main{
-			margin-left:160px;
-			padding: 0px 10px;
-		}
-
-	</style>
-
-	<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-
-
-	<title>Login here</title>
+	<meta charset="UTF-8">
+	<title>
+		Log In
+	</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/blog.css' %}">
 </head>
-
 <body>
-	<div class="sidenav">
-		<a href="/">Home</a>
-		<a href="profile/">Profile</a>
+	<header>
+
+		<div class="logo">
+			<h1 id="logo">FORUM</h1>
+		</div>
+		<div class="pages">
+			<a href="{% url 'profile' %}">Profile</a>
+			<a href="/" id="news">Home</a>
+		</div>
+		<time id="time">12:02:04 PM</time>
+	</header>
+
+	<div >
+		<form method="post" >
+			{% csrf_token %}
+			<div class="input-form">
+				<p>
+					{{form.username.errors}}
+					<input id="id_username" type="text" name="username"
+						   required>
+				</p>
+			</div>
+
+			<div class="input-form">
+				<p>
+					{{form.password.errors}}
+					<input id="id_password" type="password" name="password"
+						   required>
+				</p>
+			</div>
+
+			<div class="input-form">
+				<input type="submit" value="Sign in">
+			</div>
+
+			<div class="input-form">
+				<p>Don't have an account? Create one <a href="/register">here</a></p>
+			</div>
+
+		</form>
 	</div>
 
-    <div id="content", name="content", class="main">
-		<div class="'row justify-content-center">
-			<div class="col-8">
-				<h1 class="mt-2">likeeman and universal presents</h1>
-				<hr class="mt-0 mb-4">
-				<form method="post" class="form-group">
-                    {% csrf_token %}
-                    {{form|crispy}}
-                    <button type="submit" class="btn btn-success">Login</button>
-                    <p>Don't have an account? Create one <a href="/register">here</a></p>
-                </form>
-			</div>
-		</div>
-    </div>
-
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+	<footer>
+		<button id="upbutton" onclick="smoothJumpUp()"><i class="fa fa-level-up" aria-hidden="true"></i></button>
+		<ul class="social">
+			<li class="social_item vk">
+				<i class="fa fa-vk" aria-hidden="true"></i>
+			</li>
+			<li class="social_item instagram">
+				<i class="fa fa-instagram" aria-hidden="true"></i>
+			</li>
+		</ul>
+		<span id="footer-email">email: admin@admin.com</span><Br>
+		<span id="footer-phone">phone: 8888-9999</span>
+	</footer>
+	<script type="text/javascript" src="LK.js"></script>
 </body>
 </html>
+
 
 
 

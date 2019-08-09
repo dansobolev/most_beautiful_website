@@ -116,7 +116,7 @@ def contact_us(request):
         form = EmailForm()
         print("NOT POST")
 
-    return render(request, 'blog/contact.html', {'forms': form})
+    return render(request, 'blog/contact.html', {'form ': form})
 
 
 def test_user_page(request):

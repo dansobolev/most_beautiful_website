@@ -1,5 +1,4 @@
 {% extends 'blog/base.html' %}
-{% load crispy_forms_tags %}
 
 {% block title %}
     Contact Us
@@ -7,10 +6,35 @@
 
 {% block content %}
     <form method="post" class="form-group" action="{% url 'contact' %}">
-        You have any issues or recommends? Contact us!
-        <p></p>
         {% csrf_token %}
-        {{forms|crispy}}
-        <button type="submit" class="btn btn-success">Send</button>
+        <div class="input-form">
+            You have any issues or recommends? Contact us!
+        </div>
+
+        <div class="input-form">
+            <p>
+                <input id="id_username" type="text" name="username"
+                       placeholder="Name" required>
+            </p>
+        </div>
+
+        <div class="input-form">
+            <p>
+                <input id="id_email" type="email" name="email"
+                       placeholder="Email" required>
+            </p>
+        </div>
+
+        <div class="input-form">
+            <p>
+                <input id="id_message" type="text" name='message'
+                       placeholder="Message" required>
+            </p>
+        </div>
+
+        <div class="input-form">
+            <input type="submit" value="Submit">
+        </div>
+
     </form>
 {% endblock %}

@@ -1,7 +1,7 @@
 
 
 <!doctype html>
-
+{% load crispy_forms_tags %}
 
 
 
@@ -11,7 +11,7 @@
 	<style type="text/css">
 		.sidenav {
 			height:100%;
-			width:130px;
+			width: 130px;
 			position: fixed;
 			z-index:1;
 			top:0;
@@ -63,7 +63,7 @@
 				<hr class="mt-0 mb-4">
 				<form method="post" class="form-group">
                     {% csrf_token %}
-                    {{form.as_p}}
+                    {{form|crispy}}
                     <button type="submit" class="btn btn-success">Login</button>
                     <p>Don't have an account? Create one <a href="/register">here</a></p>
                 </form>

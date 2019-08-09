@@ -119,6 +119,10 @@ def contact_us(request):
     return render(request, 'blog/contact.html', {'forms': form})
 
 
+def test_user_page(request):
+    return render(request, 'blog/test_user_page.html')
+
+
 
 
 

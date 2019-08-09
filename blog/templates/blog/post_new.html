@@ -1,0 +1,17 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+
+    post author: {{post.author}},
+<br>
+    requst name: {{request.user.username}}
+<br>
+    post(get_object_or_404): {{ post }}
+    <h1>New post</h1>
+    <form method="POST" class="post-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+
+
+{% endblock %}

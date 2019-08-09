@@ -9,7 +9,8 @@
                 </div>
             {% endif %}
             {% if post.author.username == request.user.username %}
-                {{post.author}}, {{request.user.username}}
+                {{post.author}},
+                <P></P>{{request.user.username}}
                 <form action="{% url 'post_edit' pk=post.pk %}">
                     <button class="btn btn-light"><span class="glyphicon glyphicon-pencil">Edit</span></button>
                 </form>

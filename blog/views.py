@@ -4,7 +4,7 @@ from django.contrib.auth import login,authenticate
 from django.contrib.auth.forms import UserCreationForm
 from .forms import RegisterForm, PostForm, EmailForm
 from .models import Post
-import smtplib
+from ipware import get_client_ip
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
 
@@ -83,7 +83,8 @@ def yourprofile(request):
         answer = "Online"
     else:
         answer = "Offline"""""
-    return render(request, 'blog/my_profile.html')
+    client_ip = get_client_ip(request)
+    return render(request, 'blog/my_profile.html', {'ip_adress': client_ip})
 
 
 def password_res(req):

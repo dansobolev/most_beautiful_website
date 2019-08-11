@@ -1,10 +1,10 @@
+import requests
+from bs4 import BeautifulSoup
+
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-from django.contrib.auth import login,authenticate
-from django.contrib.auth.forms import UserCreationForm
 from .forms import RegisterForm, PostForm, EmailForm
 from .models import Post
-
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
 
@@ -70,21 +70,16 @@ def register(request):
 
 
 def yourprofile(request):
-    """user = authenticate(username='danii', password='Dantous201')
-    if user.is_active:
-        answer = "Online"
-    else:
-        answer = "Offline"""""
-    #user = User.objects.get(username=request.user.username)
-    """username = request.POST['username']
-    password = request.POST['password']
-    user = authenticate(request, username=username, password=password)
-    if user.is_active:
-        answer = "Online"
-    else:
-        answer = "Offline"""""
+    url = 'https://whoer.net/'
+    page = requests.get(url)
+    # page.status_code (если выведит 200, значит страница успешно загружена)
 
-    return render(request, 'blog/my_profile.html')
+
+    soup = BeautifulSoup(page.text, 'html.parser')
+    ip_adress = soup.find_all('strong')[0].get_text()
+    ip_adress = ip_adress.strip()
+
+    return render(request, 'blog/my_profile.html', {'ip_adress': ip_adress})
 
 
 def password_res(req):

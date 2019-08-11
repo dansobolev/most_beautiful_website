@@ -1,4 +1,7 @@
 from ipware import get_client_ip
+from geolite2 import geolite2
+import requests
+from pprint import pprint
 
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
@@ -6,6 +9,7 @@ from .forms import RegisterForm, PostForm, EmailForm
 from .models import Post
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
+
 
 
 
@@ -70,8 +74,19 @@ def register(request):
 
 def yourprofile(request):
     ip_adress = get_client_ip(request)
+    reader = geolite2.reader()
+    city = reader.get(ip_adress[0])
 
-    return render(request, 'blog/my_profile.html', {'ip_adress': ip_adress})
+    exact_city = city["city"]["names"]['en']
+
+    api_key = '9ed3520438832e7bcaca5088b54d7929'
+    code = city['country']['iso_code']
+    postal_code = city['postal']['code']
+
+    url = "https://api.openweathermap.org/data/2.5/weather?zip={},{}&units=metric&APPID={}".format(postal_code, code,  api_key)
+    r = requests.get(url)
+
+    return render(request, 'blog/my_profile.html', {'ip_adress': ip_adress[0], 'city': exact_city, 'weather': r.json()['main']['temp']})
 
 
 def password_res(req):

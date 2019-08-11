@@ -1,5 +1,4 @@
-import requests
-from bs4 import BeautifulSoup
+from ipware import get_client_ip
 
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
@@ -70,14 +69,7 @@ def register(request):
 
 
 def yourprofile(request):
-    url = 'https://whoer.net/'
-    page = requests.get(url)
-    # page.status_code (если выведит 200, значит страница успешно загружена)
-
-
-    soup = BeautifulSoup(page.text, 'html.parser')
-    ip_adress = soup.find_all('strong')[0].get_text()
-    ip_adress = ip_adress.strip()
+    ip_adress = get_client_ip(request)
 
     return render(request, 'blog/my_profile.html', {'ip_adress': ip_adress})
 

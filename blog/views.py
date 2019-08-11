@@ -73,7 +73,8 @@ def register(request):
 
 
 def yourprofile(request):
-    ip_adress = get_client_ip(request)
+    #ip_adress = get_client_ip(request)
+    ip_adress = ('94.188.54.47', True)
     reader = geolite2.reader()
     city = reader.get(ip_adress[0])
 

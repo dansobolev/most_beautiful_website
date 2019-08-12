@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Post, Email
+from .models import Post, Email, Comment
 from django.core.exceptions import ValidationError
 
 
@@ -74,3 +74,8 @@ class EmailForm(forms.ModelForm):
 
 
 
+class CommentForm(forms.ModelForm):
+
+    class Meta:
+        model = Comment
+        fields = ('author', 'text', )

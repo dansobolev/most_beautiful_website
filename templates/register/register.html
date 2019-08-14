@@ -64,7 +64,13 @@
 			</div>
 
 			<div class="register-form">
-				<input type="submit" value="Sign In">
+				<input type="submit" value="Sign Up">
+			</div>
+
+			<div class="input-form">
+				{% if errors %}
+					{{ errors }}
+				{% endif %}
 			</div>
 
 			<div class="register-form">

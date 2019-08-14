@@ -1,3 +1,5 @@
+from snowpenguin.django.recaptcha2.fields import ReCaptchaField
+from snowpenguin.django.recaptcha2.widgets import ReCaptchaWidget
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -51,6 +53,12 @@ class RegisterForm(forms.Form):
         return user
 
 
+class LoginForm(forms.Form):
+
+    username = forms.CharField(required=True)
+    password = forms.CharField(required=True)
+
+
 class EmailForm(forms.ModelForm):
     username = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': 'Your name'}))
     email = forms.EmailField(label='', widget=forms.TextInput(attrs={'placeholder': 'Your email'}))
@@ -79,3 +87,7 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('author', 'text', )
+
+
+
+

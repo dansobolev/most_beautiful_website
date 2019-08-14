@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from django.views.generic import TemplateView
 from django.contrib.auth import views as auth_views
 from django.conf.urls.static import static
 from django.conf import settings
@@ -25,8 +26,9 @@ from blog import views as v
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', v.register, name='register'),
-    path('accounts/login/', auth_views.LoginView.as_view(), name='login'),
+    path('login/', v.login_view, name='login'),
     #path('', auth_views.LoginView.as_view(), name='logout'),
+    path('payments/', include('payments.urls')),
     path('password_change/', auth_views.PasswordChangeView.as_view(), name='password_change'),
     path('password_change/done/', auth_views.PasswordChangeDoneView.as_view(), name='password_change_done'),
 
@@ -37,18 +39,15 @@ urlpatterns = [
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(),
          name='password_reset_confirm'),
 
+
     path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
 
     path('reset/done/',
          auth_views.PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'),
          name='password_reset_complete'),
 
-
-
     path('', include('blog.urls')),
     path('', include('django.contrib.auth.urls')),
-
-
 
     #потом переделать с
     #path('', include('blog.urls')),

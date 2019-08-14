@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'payments.apps.PaymentsConfig',
 ]
 
 MIDDLEWARE = [
@@ -152,6 +153,13 @@ EMAIL_HOST_PASSWORD = 'ooxwxjdiyydlsmyw'
 EMAIL_POST = 587
 EMAIL_USE_TLS = True
 #EMAIL_USE_SSL = False
+
+
+STRIPE_SECRET_KEY = 'sk_test_0uQSCl79JKGuS8UTGb0gmu2r00o4IICHgm'
+STRIPE_PUBLISHABLE_KEY = 'pk_test_grVS1M4VhH8BumV4TjARGhLA00s89QZJ39'
+
+
+
 
 
 

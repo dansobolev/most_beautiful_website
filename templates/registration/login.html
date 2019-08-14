@@ -28,6 +28,12 @@
 			{% csrf_token %}
 			<div class="input-form">
 				<p>
+
+				</p>
+			</div>
+
+			<div class="input-form">
+				<p>
 					{{form.username.errors}}
 					<input id="id_username" type="text" name="username"
 						   required>
@@ -44,6 +50,11 @@
 
 			<div class="input-form">
 				<input type="submit" value="Sign in">
+			</div>
+
+			<div class="input-form">
+				{{form.username.errors}}
+				a
 			</div>
 
 			<div class="input-form">

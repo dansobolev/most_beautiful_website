@@ -5,9 +5,11 @@ from pprint import pprint
 
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-from .forms import RegisterForm, PostForm, EmailForm, CommentForm
+from .forms import RegisterForm, LoginForm, PostForm, EmailForm, CommentForm
 from .models import Post, Comment
 from django.core.mail import send_mail
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
 from django.contrib.auth.models import User
 
 
@@ -56,21 +58,49 @@ def post_edit(request, pk):
 
 
 def register(request):
+    args = {}
     if request.method == "POST":
         print("POST")
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect("/login")
+        else:
+            args['error'] = form.errors.as_data()
+            return redirect('/register')
     else:
         print("NOT POST")
         form = RegisterForm()
 
-    return render(request, 'register/register.html', {"form": form})
+    return render(request, 'register/register.html', {"form": form, "errors": args})
 
 
+def login_view(request):
+    if request.method == 'POST':
+        print('request method is post')
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            print('form is valid')
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
 
+            user = authenticate(username = username, password = password)
 
+            if user:
+                login(request, user)
+                print('user is a user')
+                return redirect('/')
+            else:
+                print("password or username does not match")
+                form.add_error(None, "Username or password does not correct")
+                return redirect("/login")
+        else:
+            print('form is not valid')
+    else:
+        print('request method is not POST')
+        form = LoginForm()
+
+    return render(request, 'registration/login.html', {'form': form})
 
 def yourprofile(request):
     #ip_adress = get_client_ip(request)
